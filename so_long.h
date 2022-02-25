@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/01/01 02:14:49 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/24 15:34:54 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include<fcntl.h>
 # include "mlx/mlx.h"
 
 typedef struct s_info
@@ -35,5 +36,6 @@ size_t	ft_strlen(const char *str);
 int		ft_map_extension(char *arg);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_read(int fd);
 
 #endif

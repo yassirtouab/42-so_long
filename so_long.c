@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/01/01 02:22:49 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/24 15:35:55 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,31 +27,46 @@ int	ft_map_extension(char *arg)
 	return (0);
 }
 
-char	*ft_read(fd)
+char	*ft_read(int fd)
 {
-	char *buffer;
+	char buffer[2];
+	char	*mapline;
 	int	rd;
 
-	buffer =
+	rd = 1;
+	mapline = malloc(1);
+	mapline[0] = 0;
+	buffer[1] = 0;
+	while (rd == 1)
+	{
+		rd = read(fd, &buffer[0], 1);
+		mapline = ft_strjoin(mapline, buffer);
+	}
+	return (mapline);
 }
 
 int	main(int ac, char **av)
 {
 	t_info	*st;
-	void	*mlx;
-	void	*mlx_win;
-	void	*player;
-	int		w ;
+	// void	*mlx;
+	// void	*mlx_win;
+	// void	*player;
+	// int		w ;
 	int		h;
 
-	h = 0;
+	// h = 0;
 	if (ac > 1)
 		h = ft_map_extension(av[1]);
+	int fd = open("map.ber", O_RDONLY);
+	char *mapline = ft_read(fd);
+	close(fd);
+
 	printf("%d\n", h);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "SO_LONG");
-	player = mlx_xpm_file_to_image(mlx, "./assets/box.xpm", &w, &h);
-	mlx_put_image_to_window(mlx, mlx_win, player, 150, 150);
-	mlx_loop(mlx);
+	printf("%s\n", mapline);
+	// mlx = mlx_init();
+	// mlx_win = mlx_new_window(mlx, 1920, 1080, "SO_LONG");
+	// player = mlx_xpm_file_to_image(mlx, "./assets/box.xpm", &w, &h);
+	// mlx_put_image_to_window(mlx, mlx_win, player, 150, 150);
+	// mlx_loop(mlx);
 	return (0);
 }
