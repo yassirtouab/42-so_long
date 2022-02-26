@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/26 13:22:34 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/26 20:41:19 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ typedef struct s_map
 	char	*mapl;
 	char	**map;
 }				t_map;
+
+typedef struct s_mlx
+{
+	void	*init;
+	void	*win;
+	void	*player;
+	void	*exit;
+	void	*wall;
+	void	*enm;
+	int		heigth;
+	int		width;
+	int		h;
+	int		w;
+}				t_mlx;
 
 size_t	ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);

@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 17:08:36 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/26 18:07:49 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/26 19:23:54 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	ft_map_valid_char(t_map *mp)
 	while (mp->mapl[i])
 	{
 		if (mp->mapl[i] == '1' || mp->mapl[i] == '0' || mp->mapl[i] == 'C'
-			|| mp->mapl[i] == 'E' || mp->mapl[i] == 'P' || mp->mapl[i] == '\n')
+			|| mp->mapl[i] == 'E' || mp->mapl[i] == 'P' || mp->mapl[i] == '\n'
+			|| mp->mapl[i] == 'X')
 		{
 			if (mp->mapl[i] == 'E')
 				mp->e++;
