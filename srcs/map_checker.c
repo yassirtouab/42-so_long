@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 17:08:36 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/26 15:39:08 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/26 18:07:49 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_map_extension(t_map *mp)
 void	ft_map_valid_char(t_map *mp)
 {
 	size_t	i;
-	int		check;
 
 	i = 0;
 	while (mp->mapl[i])
