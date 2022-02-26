@@ -6,33 +6,66 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 02:04:27 by ytouab            #+#    #+#             */
-/*   Updated: 2022/01/01 02:04:48 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/26 13:27:18 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../so_long.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	ft_read(int fd, t_map *mp)
+{
+	char	*buffer;
+	char	*mapline;
+	int		rd;
+
+	rd = 1;
+	mapline = ft_strdup("");
+	buffer = malloc(2);
+	mapline[0] = 0;
+	buffer[1] = 0;
+	while (rd == 1)
+	{
+		rd = read(fd, &buffer[0], 1);
+		if (rd == -1)
+		{
+			free(buffer);
+			free(mapline);
+			ft_error(mp);
+		}
+		mapline = ft_strjoin(mapline, buffer);
+	}
+	free(buffer);
+	mp->mapl = mapline;
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+	size_t	l;
+
+	i = 0;
+	if (!s)
+		return ;
+	l = ft_strlen(s);
+	while (i < l)
+		write(fd, &s[i++], 1);
+}
+
+char	*ft_strdup(const char *str)
 {
 	char	*ret;
-	size_t	a[4];
+	int		i;
 
-	a[0] = 0;
-	a[1] = 0;
-	if (!s1 || !s2)
-		return (0);
-	a[2] = ft_strlen(s1);
-	a[3] = ft_strlen(s2);
-	ret = (char *)malloc((a[2] + a[3] + 1) * sizeof(char));
+	i = ft_strlen(str);
+	ret = (char *)malloc((i + 1) * sizeof(char));
 	if (!ret)
 		return (0);
-	while (a[0] < a[2])
+	i = 0;
+	while (str[i])
 	{
-		ret[a[0]] = s1[a[0]];
-		a[0]++;
+		ret[i] = str[i];
+		i++;
 	}
-	while (a[1] < a[3])
-		ret[a[0]++] = s2[a[1]++];
-	ret[a[0]] = 0;
+	ret[i] = 0;
 	return (ret);
 }
