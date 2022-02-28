@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/28 21:13:34 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/28 21:48:10 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_error(t_map *mp, t_mlx *mlx)
 	ft_quit(mp, mlx);
 }
 
-
 void	mlx_start(t_mlx *mlx, t_map *mp)
 {
 	mlx->h = 50;
@@ -55,6 +54,7 @@ void	mlx_start(t_mlx *mlx, t_map *mp)
 	ft_win_size(mp, mlx);
 	mlx->init = mlx_init();
 	mlx->win = mlx_new_window(mlx->init, mlx->width, mlx->height, "SO_LONG");
+	mlx->bg = mlx_xpm_file_to_image(mlx->init, "./assets/images/bg.xpm", &mlx->w, &mlx->h);
 	mlx->player = mlx_xpm_file_to_image(mlx->init, "./assets/images/box.xpm", &mlx->w, &mlx->h);
 	mlx->enm = mlx_xpm_file_to_image(mlx->init, "./assets/images/box.xpm", &mlx->w, &mlx->h);
 	mlx->wall = mlx_xpm_file_to_image(mlx->init, "./assets/images/box.xpm", &mlx->w, &mlx->h);
@@ -81,6 +81,7 @@ int	main(int ac, char **av)
 		ft_map_checker(mp, mlx);
 		mlx_start(mlx, mp);
 		mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, 0, 0);
+		mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, 100, 0);
 		mlx_loop(mlx);
 		ft_quit(mp, mlx);
 	}

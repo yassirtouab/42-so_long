@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/28 18:46:53 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/28 21:46:39 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_mlx
 {
 	void	*init;
 	void	*win;
+	void	*bg;
 	void	*player;
 	void	*exit;
 	void	*wall;
