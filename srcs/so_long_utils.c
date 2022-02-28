@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 18:14:24 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/26 13:17:47 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:04:03 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ size_t	ft_wordcount(char *str, t_map *mp)
 	return (nb);
 }
 
-void	ft_split(char *str, t_map *mp)
+void	ft_split(char *str, t_map *mp, t_mlx *mlx)
 {
 	char	**ret;
 	size_t	wordc;
@@ -59,7 +59,7 @@ void	ft_split(char *str, t_map *mp)
 	wordc = ft_wordcount(str, mp);
 	ret = (char **)malloc((wordc + 1) * sizeof(char *));
 	if (!ret)
-		ft_error(mp);
+		ft_error(mp, mlx);
 	i = 0;
 	while (i < wordc)
 	{

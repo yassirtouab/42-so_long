@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/02/26 20:41:19 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/02/28 18:46:53 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_mlx
 	void	*exit;
 	void	*wall;
 	void	*enm;
-	int		heigth;
+	int		height;
 	int		width;
 	int		h;
 	int		w;
@@ -47,17 +47,19 @@ typedef struct s_mlx
 
 size_t	ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);
-void	ft_map_extension(t_map *mp);
-void	ft_split(char *str, t_map *mp);
+void	ft_map_extension(t_map *mp, t_mlx *mlx);
+void	ft_split(char *str, t_map *mp, t_mlx *mlx);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *str);
 void	ft_mp_init(t_map *mp);
-void	ft_read(int fd, t_map *mp);
-void	ft_map_valid_char(t_map *mp);
-void	ft_check_rect(t_map *mp);
-void	ft_check_walls(t_map *mp);
-void	ft_map_checker(t_map *mp);
-void	ft_quit(t_map *mp);
-void	ft_error(t_map *mp);
+void	ft_read(int fd, t_map *mp, t_mlx *mlx);
+void	ft_map_valid_char(t_map *mp, t_mlx *mlx);
+void	ft_check_rect(t_map *mp, t_mlx *mlx);
+void	ft_check_walls(t_map *mp, t_mlx *mlx);
+void	ft_map_checker(t_map *mp, t_mlx *mlx);
+void	ft_quit(t_map *mp, t_mlx *mlx);
+void	ft_error(t_map *mp, t_mlx *mlx);
+void	ft_win_size(t_map *mp, t_mlx *mlx);
+void	mlx_start(t_mlx *mlx, t_map *mp);
 
 #endif
