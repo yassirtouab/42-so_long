@@ -6,7 +6,7 @@
 #    By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 16:07:37 by ytouab            #+#    #+#              #
-#    Updated: 2022/02/26 18:07:05 by ytouab           ###   ########.fr        #
+#    Updated: 2022/02/26 22:55:48 by ytouab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ $(NAME):	${OBJS}
 		@${GCCF} ${OBJS} ${MLX} -o ${NAME}
 		@echo ${GREEN}"Compilation Done ✅"
 
+normal: 	${OBJS}
+		@${GCCF} ${OBJS} -o ${NAME}
+		@echo ${GREEN}"Compilation Done ✅"
 
 
 all:	${NAME}
