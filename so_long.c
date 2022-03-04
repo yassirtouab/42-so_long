@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/03 22:11:08 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/04 20:50:24 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ void	ft_background(t_map *mp, t_mlx *mlx)
 
 int	ft_put_player(t_mlx *mlx)
 {
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, (mlx->x) * 50, (mlx->y ) * 50);
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, (mlx->x) * 50, (mlx->y ) * 50);
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, mlx->x * 50, mlx->y * 50);
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
+	mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
 	return (0);
 }
 
@@ -97,38 +99,66 @@ void	ft_map_start(t_map *mp, t_mlx *mlx)
 		while (mp->map[mlx->y][mlx->x])
 		{
 			if (mp->map[mlx->y][mlx->x] == '1')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, (mlx->x) * 50, (mlx->y ) * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, mlx->x * 50, mlx->y * 50);
 			else if (mp->map[mlx->y][mlx->x] == 'C')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->col, (mlx->x) * 50, (mlx->y ) * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win, mlx->col, mlx->x * 50, mlx->y * 50);
 			else if (mp->map[mlx->y][mlx->x] == 'E')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->exit, (mlx->x) * 50, (mlx->y ) * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win, mlx->exit, mlx->x * 50, mlx->y * 50);
 			else if (mp->map[mlx->y][mlx->x] == 'X')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->enm, (mlx->x) * 50, (mlx->y ) * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win, mlx->enm, mlx->x * 50, mlx->y * 50);
 			else if (mp->map[mlx->y][mlx->x] == 'P')
-			{
-				int z = (*ft_put_player)(mlx)
-				mlx_loop_hook(mlx->init, &(), mlx);
-			}
+				mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
+				// mlx_loop_hook(mlx->win, ft_put_player, mlx);
 			mlx->x++;
 		}
 		mlx->y++;
 	}
 }
 
-// void	ft_player_pos(t_map *mp, t_mlx *mlx)
-// {
+void	ft_player_pos(t_map *mp, t_mlx *mlx)
+{
+	mlx->y = 0;
+	mlx->x = 0;
+	while (mp->map[mlx->y] && mp->map[mlx->y][mlx->x] != 'P')
+	{
+		mlx->x = 0;
+		while (mp->map[mlx->y][mlx->x] && mp->map[mlx->y][mlx->x] != 'P')
+		{
+			if (mp->map[mlx->y][mlx->x] == 'P')
+				break ;
+			mlx->x++;
+		}
+		if (mp->map[mlx->y][mlx->x] == 'P')
+			break ;
+		mlx->y++;
+	}
+}
 
-// }
-
-// void	ft_move(t_map *mp, t_mlx *mlx)
-// {
-
-// }
+int	ft_key(int keycode, t_mlx *mlx)
+{
+	if (keycode == UP)
+		printf("UP\n");
+	else if (keycode == DOWN)
+		printf("DOWN\n");
+	else if (keycode == RIGHT)
+		printf("RIGHT\n");
+	else if (keycode == ESC)
+		printf("ESC\n");
+	mlx->x = mlx->x;
+	return (0);
+}
 
 void	ft_win_size(t_map *mp, t_mlx *mlx)
 {
 	mlx->width = mlx->w * mp->width;
 	mlx->height = mlx->h * mp->height;
+}
+
+int	ft_xpress(t_mlx *mlx)
+{
+	printf("exiting %d\n", mlx->x);
+	exit(0);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -145,6 +175,9 @@ int	main(int ac, char **av)
 		ft_map_checker(mp, mlx);
 		mlx_start(mlx, mp);
 		ft_map_start(mp, mlx);
+		ft_player_pos(mp, mlx);
+		mlx_hook(mlx->win, 17, 0, ft_xpress, mlx);
+		mlx_key_hook(mlx->win, ft_key, mlx);
 		mlx_loop(mlx);
 		ft_quit(mp, mlx);
 	}

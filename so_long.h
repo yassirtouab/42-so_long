@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/03 22:09:32 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/04 20:49:16 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "mlx/mlx.h"
+
+# define ESC 53
+# define DOWN 1
+# define UP 13
+# define RIGHT 2
+# define LEFT 0
 
 typedef struct s_map
 {
@@ -69,6 +75,8 @@ void	ft_win_size(t_map *mp, t_mlx *mlx);
 void	mlx_start(t_mlx *mlx, t_map *mp);
 void	ft_background(t_map *mp, t_mlx *mlx);
 void	ft_map_start(t_map *mp, t_mlx *mlx);
-int	ft_put_player(t_mlx *mlx);
+int		ft_put_player(t_mlx *mlx);
+void	ft_player_pos(t_map *mp, t_mlx *mlx);
+int		ft_key(int keycode, t_mlx *mlx);
 
 #endif
