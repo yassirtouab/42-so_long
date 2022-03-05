@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 19:36:21 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 22:14:21 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int		ft_check_movement(int keycode, t_mlx *mlx);
 void	ft_pass_map(t_map *mp, t_mlx *mlx);
 void	ft_free_mp(t_map *mp);
 void	ft_end(t_mlx *mlx);
+char	*ft_itoa(int n);
 
 #endif
