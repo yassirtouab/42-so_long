@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 13:17:04 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 19:36:21 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_mlx
 	void	*bg;
 	void	*player;
 	void	*player2;
+	void	*pdead;
 	void	*exitc;
 	void	*exit;
 	void	*wall;
@@ -55,11 +56,13 @@ typedef struct s_mlx
 	int		w;
 	int		x;
 	int		y;
+	int		eposx;
+	int		eposy;
 	char	**map;
 	size_t	c;
-	size_t	collected;
 	size_t	mwidth;
 	size_t	mheight;
+	size_t	move;
 }				t_mlx;
 
 size_t	ft_strlen(const char *str);
@@ -83,7 +86,7 @@ void	ft_map_start(t_mlx *mlx);
 int		ft_put_player(t_mlx *mlx);
 void	ft_player_pos(t_mlx *mlx);
 int		ft_move(int keycode, t_mlx *mlx);
-int		ft_valid_movement(char npos, t_mlx *mlx);
+int		ft_valid_movement(char *npos, t_mlx *mlx);
 int		ft_check_movement(int keycode, t_mlx *mlx);
 void	ft_pass_map(t_map *mp, t_mlx *mlx);
 void	ft_free_mp(t_map *mp);

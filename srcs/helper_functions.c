@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 03:42:57 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 12:58:41 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 18:34:31 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	mlx_start(t_mlx *mlx, t_map *mp)
 			"./assets/images/DoorLocked.xpm", &mlx->w, &mlx->h);
 	mlx->col = mlx_xpm_file_to_image(mlx->init,
 			"./assets/images/col.xpm", &mlx->w, &mlx->h);
+	mlx->pdead = mlx_xpm_file_to_image(mlx->init,
+			"./assets/images/dead.xpm", &mlx->w, &mlx->h);
 	ft_pass_map(mp, mlx);
-	mlx->collected = 0;
 }
 
 void	ft_mp_init(t_map *mp)

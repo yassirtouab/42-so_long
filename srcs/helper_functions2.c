@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 12:50:56 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 13:19:55 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 14:37:16 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_pass_map(t_map *mp, t_mlx *mlx)
 		mlx->map[i] = ft_strdup(mp->map[i]);
 		i++;
 	}
+	mlx->map[i] = NULL;
 	mlx->c = mp->c;
 	mlx->mheight = mp->height;
 	mlx->mwidth = mp->width;
