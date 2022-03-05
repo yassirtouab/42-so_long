@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 11:09:02 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 13:17:04 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_mlx
 	char	**map;
 	size_t	c;
 	size_t	collected;
+	size_t	mwidth;
+	size_t	mheight;
 }				t_mlx;
 
 size_t	ft_strlen(const char *str);
@@ -76,12 +78,15 @@ void	ft_quit(t_map *mp, t_mlx *mlx);
 void	ft_error(t_map *mp, t_mlx *mlx);
 void	ft_win_size(t_map *mp, t_mlx *mlx);
 void	mlx_start(t_mlx *mlx, t_map *mp);
-void	ft_background(t_map *mp, t_mlx *mlx);
-void	ft_map_start(t_map *mp, t_mlx *mlx);
+void	ft_background(t_mlx *mlx);
+void	ft_map_start(t_mlx *mlx);
 int		ft_put_player(t_mlx *mlx);
 void	ft_player_pos(t_mlx *mlx);
 int		ft_move(int keycode, t_mlx *mlx);
 int		ft_valid_movement(char npos, t_mlx *mlx);
 int		ft_check_movement(int keycode, t_mlx *mlx);
+void	ft_pass_map(t_map *mp, t_mlx *mlx);
+void	ft_free_mp(t_map *mp);
+void	ft_end(t_mlx *mlx);
 
 #endif
