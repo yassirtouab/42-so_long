@@ -6,65 +6,11 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/04 20:50:24 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/05 11:08:56 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	ft_mp_init(t_map *mp)
-{
-	mp->c = 0;
-	mp->p = 0;
-	mp->e = 0;
-	mp->width = 0;
-	mp->height = 0;
-	mp->map_file = NULL;
-	mp->mapl = NULL;
-	mp->map = NULL;
-}
-
-void	ft_quit(t_map *mp, t_mlx *mlx)
-{
-	size_t	i;
-
-	i = 0;
-	free(mp->mapl);
-	free(mp->map_file);
-	while (i < mp->height)
-		free(mp->map[i++]);
-	free(mp->map);
-	free(mp);
-	free(mlx);
-	exit(0);
-}
-
-void	ft_error(t_map *mp, t_mlx *mlx)
-{
-	ft_putstr_fd("Error\n", 2);
-	ft_quit(mp, mlx);
-}
-
-void	mlx_start(t_mlx *mlx, t_map *mp)
-{
-	mlx->h = 50;
-	mlx->w = 50;
-	mlx->width = 0;
-	mlx->height = 0;
-	mlx->x = 0;
-	mlx->y = 0;
-	ft_win_size(mp, mlx);
-	mlx->init = mlx_init();
-	mlx->win = mlx_new_window(mlx->init, mlx->width, mlx->height, "SO_LONG");
-	mlx->bg = mlx_xpm_file_to_image(mlx->init, "./assets/images/bg.xpm", &mlx->w, &mlx->h);
-	mlx->player = mlx_xpm_file_to_image(mlx->init, "./assets/images/player2nd.xpm", &mlx->w, &mlx->h);
-	mlx->player2 = mlx_xpm_file_to_image(mlx->init, "./assets/images/player.xpm", &mlx->w, &mlx->h);
-	mlx->enm = mlx_xpm_file_to_image(mlx->init, "./assets/images/saw.xpm", &mlx->w, &mlx->h);
-	mlx->wall = mlx_xpm_file_to_image(mlx->init, "./assets/images/box.xpm", &mlx->w, &mlx->h);
-	mlx->exit = mlx_xpm_file_to_image(mlx->init, "./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
-	mlx->exitc = mlx_xpm_file_to_image(mlx->init, "./assets/images/DoorLocked.xpm", &mlx->w, &mlx->h);
-	mlx->col = mlx_xpm_file_to_image(mlx->init, "./assets/images/col.xpm", &mlx->w, &mlx->h);
-}
 
 void	ft_background(t_map *mp, t_mlx *mlx)
 {
@@ -73,7 +19,8 @@ void	ft_background(t_map *mp, t_mlx *mlx)
 		mlx->x = 0;
 		while (mp->map[mlx->y][mlx->x])
 		{
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, (mlx->x) * 50, (mlx->y ) * 50);
+			mlx_put_image_to_window(mlx->init,
+				mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
 			mlx->x++;
 		}
 		mlx->y++;
@@ -93,7 +40,7 @@ void	ft_map_start(t_map *mp, t_mlx *mlx)
 {
 	ft_background(mp, mlx);
 	mlx->y = 0;
-		while (mp->map[mlx->y])
+	while (mp->map[mlx->y])
 	{
 		mlx->x = 0;
 		while (mp->map[mlx->y][mlx->x])
@@ -115,43 +62,68 @@ void	ft_map_start(t_map *mp, t_mlx *mlx)
 	}
 }
 
-void	ft_player_pos(t_map *mp, t_mlx *mlx)
+void	ft_player_pos(t_mlx *mlx)
 {
 	mlx->y = 0;
 	mlx->x = 0;
-	while (mp->map[mlx->y] && mp->map[mlx->y][mlx->x] != 'P')
+	while (mlx->map[mlx->y] && mlx->map[mlx->y][mlx->x] != 'P')
 	{
 		mlx->x = 0;
-		while (mp->map[mlx->y][mlx->x] && mp->map[mlx->y][mlx->x] != 'P')
+		while (mlx->map[mlx->y][mlx->x] && mlx->map[mlx->y][mlx->x] != 'P')
 		{
-			if (mp->map[mlx->y][mlx->x] == 'P')
+			if (mlx->map[mlx->y][mlx->x] == 'P')
 				break ;
 			mlx->x++;
 		}
-		if (mp->map[mlx->y][mlx->x] == 'P')
+		if (mlx->map[mlx->y][mlx->x] == 'P')
 			break ;
 		mlx->y++;
 	}
 }
 
-int	ft_key(int keycode, t_mlx *mlx)
+int	ft_move(int keycode, t_mlx *mlx)
 {
-	if (keycode == UP)
-		printf("UP\n");
-	else if (keycode == DOWN)
-		printf("DOWN\n");
-	else if (keycode == RIGHT)
-		printf("RIGHT\n");
+	if (ft_check_movement(keycode, mlx))
+	{
+		mlx_put_image_to_window(mlx->init,
+			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+		if (keycode == UP)
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, --(mlx->y) * 50);
+		else if (keycode == DOWN)
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, ++(mlx->y) * 50);
+		else if (keycode == RIGHT)
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, ++(mlx->x) * 50, mlx->y * 50);
+		else if (keycode == LEFT)
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, --(mlx->x) * 50, mlx->y * 50);
+	}
 	else if (keycode == ESC)
-		printf("ESC\n");
-	mlx->x = mlx->x;
+		exit (0);
 	return (0);
 }
 
-void	ft_win_size(t_map *mp, t_mlx *mlx)
+int	ft_valid_movement(char npos, t_mlx *mlx)
 {
-	mlx->width = mlx->w * mp->width;
-	mlx->height = mlx->h * mp->height;
+	if (npos == '0' || npos == 'C' || npos == 'P' || (npos == 'E' && mlx->c == mlx->collected))
+		return (1);
+	else if (npos == 'X' )
+	{
+		mlx_put_image_to_window(mlx->init,
+			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+	}
+	return (0);
+}
+
+int	ft_check_movement(int keycode, t_mlx *mlx)
+{
+	if (keycode == UP)
+		return (ft_valid_movement(mlx->map[mlx->y - 1][mlx->x], mlx));
+	else if (keycode == DOWN)
+		return (ft_valid_movement(mlx->map[mlx->y + 1][mlx->x], mlx));
+	else if (keycode == RIGHT)
+		return (ft_valid_movement(mlx->map[mlx->y][mlx->x + 1], mlx));
+	else if (keycode == LEFT)
+		return (ft_valid_movement(mlx->map[mlx->y][mlx->x - 1], mlx));
+	return (0);
 }
 
 int	ft_xpress(t_mlx *mlx)
@@ -175,9 +147,9 @@ int	main(int ac, char **av)
 		ft_map_checker(mp, mlx);
 		mlx_start(mlx, mp);
 		ft_map_start(mp, mlx);
-		ft_player_pos(mp, mlx);
+		ft_player_pos(mlx);
 		mlx_hook(mlx->win, 17, 0, ft_xpress, mlx);
-		mlx_key_hook(mlx->win, ft_key, mlx);
+		mlx_key_hook(mlx->win, ft_move, mlx);
 		mlx_loop(mlx);
 		ft_quit(mp, mlx);
 	}

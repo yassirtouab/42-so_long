@@ -6,7 +6,7 @@
 #    By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 16:07:37 by ytouab            #+#    #+#              #
-#    Updated: 2022/02/26 22:55:48 by ytouab           ###   ########.fr        #
+#    Updated: 2022/03/05 03:50:11 by ytouab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ MLX			=	-Lmlx -lmlx -framework OpenGL -framework AppKit
 SRC			=	so_long.c \
 				srcs/so_long_utils.c \
 				srcs/so_long_utils2.c \
-				srcs/map_checker.c
+				srcs/map_checker.c \
+				srcs/helper_functions.c
 
 
 
