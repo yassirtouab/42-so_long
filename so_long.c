@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/07 12:44:56 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 16:26:19 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,9 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 		if (*npos == 'C')
 		{
 			*npos = '0';
+			printf("Before: %zu\n", mlx->c);
 			mlx->c--;
+			printf("After: %zu\n", mlx->c);
 		}
 		mlx->move++;
 		if (!mlx->c)
