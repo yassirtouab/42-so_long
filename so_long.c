@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/07 11:29:03 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 12:44:56 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	ft_put_player(t_mlx *mlx)
 		if (i == 40)
 			i = 0;
 	}
+	else
+		ft_hold_end(mlx);
 	return (0);
 }
 
@@ -175,7 +177,7 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 	else if (*npos == 'E' && !mlx->c)
 	{
 		mlx->move++;
-		mlx->end = 1;
+		mlx->end++;
 		return (1);
 	}
 	else if (*npos == 'X' )
@@ -185,7 +187,21 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
 		mlx_put_image_to_window(mlx->init,
 			mlx->win, mlx->pdead, mlx->x * 50, mlx->y * 50);
-		mlx->end = 1;
+		mlx->end++;
+	}
+	return (0);
+}
+
+int	ft_hold_end(t_mlx *mlx)
+{
+	if (mlx->end)
+	{
+		if (mlx->map[mlx->y][mlx->x] == 'E' && mlx->end == 5000)
+			mlx_put_image_to_window(mlx->init,
+				mlx->win, mlx->exit, mlx->x * 50, mlx->y * 50);
+		if (mlx->end == 15000)
+			ft_end(mlx);
+		mlx->end++;
 	}
 	return (0);
 }
