@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 22:23:57 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 05:44:26 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,25 @@ void	ft_background(t_mlx *mlx)
 
 int	ft_put_player(t_mlx *mlx)
 {
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, mlx->x * 50, mlx->y * 50);
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
-	mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+	int i;
+
+	i = 0;
+	while (i < 1000)
+	{
+		if (i < 500)
+		{
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
+			printf("player2");
+		}
+		else
+		{
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, mlx->x * 50, mlx->y * 50);
+			printf("player1");
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -124,14 +139,6 @@ int	ft_move(int keycode, t_mlx *mlx)
 int	ft_valid_movement(char *npos, t_mlx *mlx)
 {
 	ft_exit_pos(mlx);
-	if (!mlx->c)
-	{
-		mlx->exit = mlx_xpm_file_to_image(mlx->init,
-			"./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
-		mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
-		mlx_put_image_to_window(mlx->init, mlx->win, mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
-	}
-	printf("moves: %zu\n", mlx->move);
 	if (*npos == '0' || *npos == 'C' || *npos == 'P')
 	{
 		if (*npos == 'C')
@@ -140,6 +147,13 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 			mlx->c--;
 		}
 		mlx->move++;
+		if (!mlx->c)
+		{
+			mlx->exit = mlx_xpm_file_to_image(mlx->init,
+				"./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win, mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
+		}
 		return (1);
 	}
 	else if (*npos == 'E' && !mlx->c)
@@ -193,6 +207,7 @@ int	main(int ac, char **av)
 		mlx_start(mlx, mp);
 		ft_map_start(mlx);
 		ft_player_pos(mlx);
+		mlx_loop_hook(mlx->init, ft_put_player, mlx);
 		mlx_hook(mlx->win, 17, 0, ft_xpress, mlx);
 		mlx_key_hook(mlx->win, ft_move, mlx);
 		mlx_loop(mlx);
