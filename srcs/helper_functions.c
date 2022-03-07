@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 03:42:57 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 18:34:31 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 10:14:05 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_win_size(t_map *mp, t_mlx *mlx)
 	mlx->height = 0;
 	mlx->x = 0;
 	mlx->y = 0;
+	mlx->end = 0;
 	mlx->width = mlx->w * mp->width;
 	mlx->height = mlx->h * mp->height;
 }

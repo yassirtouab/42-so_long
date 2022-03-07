@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 22:14:21 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 10:11:51 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_mlx
 	int		y;
 	int		eposx;
 	int		eposy;
+	int		end;
 	char	**map;
 	size_t	c;
 	size_t	mwidth;

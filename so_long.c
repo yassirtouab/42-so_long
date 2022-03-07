@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/07 05:44:26 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/07 11:29:03 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,27 @@ void	ft_background(t_mlx *mlx)
 
 int	ft_put_player(t_mlx *mlx)
 {
-	int i;
+	static size_t	i;
 
-	i = 0;
-	while (i < 1000)
+	if (!mlx->end)
 	{
-		if (i < 500)
+		if (i < 20)
 		{
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
-			printf("player2");
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->bg, mlx->x * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init,
+				mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
 		}
 		else
 		{
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player, mlx->x * 50, mlx->y * 50);
-			printf("player1");
+			mlx_put_image_to_window(mlx->init,
+				mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->player, mlx->x * 50, mlx->y * 50);
 		}
 		i++;
+		if (i == 40)
+			i = 0;
 	}
 	return (0);
 }
@@ -61,15 +64,20 @@ void	ft_map_start(t_mlx *mlx)
 		while (mlx->map[mlx->y][mlx->x])
 		{
 			if (mlx->map[mlx->y][mlx->x] == '1')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, mlx->x * 50, mlx->y * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->wall, mlx->x * 50, mlx->y * 50);
 			else if (mlx->map[mlx->y][mlx->x] == 'C')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->col, mlx->x * 50, mlx->y * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->col, mlx->x * 50, mlx->y * 50);
 			else if (mlx->map[mlx->y][mlx->x] == 'E')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->exitc, mlx->x * 50, mlx->y * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->exitc, mlx->x * 50, mlx->y * 50);
 			else if (mlx->map[mlx->y][mlx->x] == 'X')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->enm, mlx->x * 50, mlx->y * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->enm, mlx->x * 50, mlx->y * 50);
 			else if (mlx->map[mlx->y][mlx->x] == 'P')
-				mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, mlx->y * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->player2, mlx->x * 50, mlx->y * 50);
 			mlx->x++;
 		}
 		mlx->y++;
@@ -102,7 +110,8 @@ void	ft_exit_pos(t_mlx *mlx)
 	while (mlx->map[mlx->eposy] && mlx->map[mlx->eposy][mlx->eposx] != 'E')
 	{
 		mlx->eposx = 0;
-		while (mlx->map[mlx->eposy][mlx->eposx] && mlx->map[mlx->eposy][mlx->eposx] != 'P')
+		while (mlx->map[mlx->eposy][mlx->eposx]
+			&& mlx->map[mlx->eposy][mlx->eposx] != 'P')
 		{
 			if (mlx->map[mlx->eposy][mlx->eposx] == 'E')
 				break ;
@@ -121,15 +130,20 @@ int	ft_move(int keycode, t_mlx *mlx)
 		mlx_put_image_to_window(mlx->init,
 			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
 		if (keycode == UP)
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, --(mlx->y) * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->player2, mlx->x * 50, --(mlx->y) * 50);
 		else if (keycode == DOWN)
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, mlx->x * 50, ++(mlx->y) * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->player2, mlx->x * 50, ++(mlx->y) * 50);
 		else if (keycode == RIGHT)
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, ++(mlx->x) * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->player2, ++(mlx->x) * 50, mlx->y * 50);
 		else if (keycode == LEFT)
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->player2, --(mlx->x) * 50, mlx->y * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->player2, --(mlx->x) * 50, mlx->y * 50);
 		mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, 0, 0);
-		mlx_string_put(mlx->init, mlx->win, 21, 29, 0x0000FF00, ft_itoa(mlx->move));
+		mlx_string_put(mlx->init, mlx->win, 21, 29, 0x0000FF00,
+			ft_itoa(mlx->move));
 	}
 	else if (keycode == ESC)
 		ft_end(mlx);
@@ -139,6 +153,8 @@ int	ft_move(int keycode, t_mlx *mlx)
 int	ft_valid_movement(char *npos, t_mlx *mlx)
 {
 	ft_exit_pos(mlx);
+	mlx->exit = mlx_xpm_file_to_image(mlx->init,
+			"./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
 	if (*npos == '0' || *npos == 'C' || *npos == 'P')
 	{
 		if (*npos == 'C')
@@ -149,16 +165,17 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 		mlx->move++;
 		if (!mlx->c)
 		{
-			mlx->exit = mlx_xpm_file_to_image(mlx->init,
-				"./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
-			mlx_put_image_to_window(mlx->init, mlx->win, mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
+			mlx_put_image_to_window(mlx->init, mlx->win,
+				mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
 		}
 		return (1);
 	}
 	else if (*npos == 'E' && !mlx->c)
 	{
 		mlx->move++;
+		mlx->end = 1;
 		return (1);
 	}
 	else if (*npos == 'X' )
@@ -168,21 +185,24 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
 		mlx_put_image_to_window(mlx->init,
 			mlx->win, mlx->pdead, mlx->x * 50, mlx->y * 50);
-		// ft_end(mlx);
+		mlx->end = 1;
 	}
 	return (0);
 }
 
 int	ft_check_movement(int keycode, t_mlx *mlx)
 {
-	if (keycode == UP)
-		return (ft_valid_movement(&mlx->map[mlx->y - 1][mlx->x], mlx));
-	else if (keycode == DOWN)
-		return (ft_valid_movement(&mlx->map[mlx->y + 1][mlx->x], mlx));
-	else if (keycode == RIGHT)
-		return (ft_valid_movement(&mlx->map[mlx->y][mlx->x + 1], mlx));
-	else if (keycode == LEFT)
-		return (ft_valid_movement(&mlx->map[mlx->y][mlx->x - 1], mlx));
+	if (!mlx->end)
+	{
+		if (keycode == UP)
+			return (ft_valid_movement(&mlx->map[mlx->y - 1][mlx->x], mlx));
+		else if (keycode == DOWN)
+			return (ft_valid_movement(&mlx->map[mlx->y + 1][mlx->x], mlx));
+		else if (keycode == RIGHT)
+			return (ft_valid_movement(&mlx->map[mlx->y][mlx->x + 1], mlx));
+		else if (keycode == LEFT)
+			return (ft_valid_movement(&mlx->map[mlx->y][mlx->x - 1], mlx));
+	}
 	return (0);
 }
 
