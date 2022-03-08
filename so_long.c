@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/07 16:26:19 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/08 14:36:29 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	ft_exit_pos(t_mlx *mlx)
 	{
 		mlx->eposx = 0;
 		while (mlx->map[mlx->eposy][mlx->eposx]
-			&& mlx->map[mlx->eposy][mlx->eposx] != 'P')
+			&& mlx->map[mlx->eposy][mlx->eposx] != 'E')
 		{
 			if (mlx->map[mlx->eposy][mlx->eposx] == 'E')
 				break ;
@@ -154,7 +154,6 @@ int	ft_move(int keycode, t_mlx *mlx)
 
 int	ft_valid_movement(char *npos, t_mlx *mlx)
 {
-	ft_exit_pos(mlx);
 	mlx->exit = mlx_xpm_file_to_image(mlx->init,
 			"./assets/images/DoorOpen.xpm", &mlx->w, &mlx->h);
 	if (*npos == '0' || *npos == 'C' || *npos == 'P')
@@ -162,18 +161,17 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 		if (*npos == 'C')
 		{
 			*npos = '0';
-			printf("Before: %zu\n", mlx->c);
 			mlx->c--;
-			printf("After: %zu\n", mlx->c);
+			if (!mlx->c)
+			{
+				ft_exit_pos(mlx);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
+				mlx_put_image_to_window(mlx->init, mlx->win,
+					mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
+			}
 		}
 		mlx->move++;
-		if (!mlx->c)
-		{
-			mlx_put_image_to_window(mlx->init, mlx->win,
-				mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
-			mlx_put_image_to_window(mlx->init, mlx->win,
-				mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
-		}
 		return (1);
 	}
 	else if (*npos == 'E' && !mlx->c)
