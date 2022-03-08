@@ -6,7 +6,7 @@
 #    By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/26 16:07:37 by ytouab            #+#    #+#              #
-#    Updated: 2022/03/08 16:56:39 by ytouab           ###   ########.fr        #
+#    Updated: 2022/03/08 19:17:04 by ytouab           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC			=	so_long.c \
 				srcs/helper_functions2.c \
 				srcs/helper_functions3.c \
 				srcs/move.c \
-				srcs/mapping.c
+				srcs/mapping.c \
+				srcs/enemies.c
 
 
 
