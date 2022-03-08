@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 15:04:50 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/08 16:55:55 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,7 @@ char	*ft_itoa(int n);
 void	ft_open_door(t_mlx *mlx);
 void	ft_pdead(t_mlx *mlx);
 void	ft_map_content(t_mlx *mlx);
+int		ft_xpress(t_mlx *mlx);
+void	ft_exit_pos(t_mlx *mlx);
 
 #endif
