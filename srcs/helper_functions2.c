@@ -6,11 +6,37 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 12:50:56 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/05 14:37:16 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:16:31 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	ft_read(int fd, t_map *mp, t_mlx *mlx)
+{
+	char	*buffer;
+	char	*mapline;
+	int		rd;
+
+	rd = 1;
+	mapline = ft_strdup("");
+	buffer = malloc(2);
+	mapline[0] = 0;
+	buffer[1] = 0;
+	while (rd == 1)
+	{
+		rd = read(fd, &buffer[0], 1);
+		if (rd == -1)
+		{
+			free(buffer);
+			free(mapline);
+			ft_error(mp, mlx);
+		}
+		mapline = ft_strjoin(mapline, buffer);
+	}
+	free(buffer);
+	mp->mapl = mapline;
+}
 
 void	ft_free_mp(t_map *mp)
 {
