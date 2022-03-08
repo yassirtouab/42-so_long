@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 14:36:29 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/08 15:05:07 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,26 +64,29 @@ void	ft_map_start(t_mlx *mlx)
 	{
 		mlx->x = 0;
 		while (mlx->map[mlx->y][mlx->x])
-		{
-			if (mlx->map[mlx->y][mlx->x] == '1')
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->wall, mlx->x * 50, mlx->y * 50);
-			else if (mlx->map[mlx->y][mlx->x] == 'C')
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->col, mlx->x * 50, mlx->y * 50);
-			else if (mlx->map[mlx->y][mlx->x] == 'E')
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->exitc, mlx->x * 50, mlx->y * 50);
-			else if (mlx->map[mlx->y][mlx->x] == 'X')
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->enm, mlx->x * 50, mlx->y * 50);
-			else if (mlx->map[mlx->y][mlx->x] == 'P')
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->player2, mlx->x * 50, mlx->y * 50);
-			mlx->x++;
-		}
+			ft_map_content(mlx);
 		mlx->y++;
 	}
+}
+
+void	ft_map_content(t_mlx *mlx)
+{
+	if (mlx->map[mlx->y][mlx->x] == '1')
+		mlx_put_image_to_window(mlx->init, mlx->win,
+			mlx->wall, mlx->x * 50, mlx->y * 50);
+	else if (mlx->map[mlx->y][mlx->x] == 'C')
+		mlx_put_image_to_window(mlx->init, mlx->win,
+			mlx->col, mlx->x * 50, mlx->y * 50);
+	else if (mlx->map[mlx->y][mlx->x] == 'E')
+		mlx_put_image_to_window(mlx->init, mlx->win,
+			mlx->exitc, mlx->x * 50, mlx->y * 50);
+	else if (mlx->map[mlx->y][mlx->x] == 'X')
+		mlx_put_image_to_window(mlx->init, mlx->win,
+			mlx->enm, mlx->x * 50, mlx->y * 50);
+	else if (mlx->map[mlx->y][mlx->x] == 'P')
+		mlx_put_image_to_window(mlx->init, mlx->win,
+			mlx->player2, mlx->x * 50, mlx->y * 50);
+	mlx->x++;
 }
 
 void	ft_player_pos(t_mlx *mlx)
@@ -163,13 +166,7 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 			*npos = '0';
 			mlx->c--;
 			if (!mlx->c)
-			{
-				ft_exit_pos(mlx);
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
-				mlx_put_image_to_window(mlx->init, mlx->win,
-					mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
-			}
+				ft_open_door(mlx);
 		}
 		mlx->move++;
 		return (1);
@@ -177,19 +174,33 @@ int	ft_valid_movement(char *npos, t_mlx *mlx)
 	else if (*npos == 'E' && !mlx->c)
 	{
 		mlx->move++;
+		ft_putstr_fd("YOU WON!\n", 1);
 		mlx->end++;
 		return (1);
 	}
 	else if (*npos == 'X' )
-	{
-		mlx->move++;
-		mlx_put_image_to_window(mlx->init,
-			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
-		mlx_put_image_to_window(mlx->init,
-			mlx->win, mlx->pdead, mlx->x * 50, mlx->y * 50);
-		mlx->end++;
-	}
+		ft_pdead(mlx);
 	return (0);
+}
+
+void	ft_open_door(t_mlx *mlx)
+{
+	ft_exit_pos(mlx);
+	mlx_put_image_to_window(mlx->init, mlx->win,
+		mlx->bg, mlx->eposx * 50, mlx->eposy * 50);
+	mlx_put_image_to_window(mlx->init, mlx->win,
+		mlx->exit, mlx->eposx * 50, mlx->eposy * 50);
+}
+
+void	ft_pdead(t_mlx *mlx)
+{
+	mlx->move++;
+	mlx_put_image_to_window(mlx->init,
+		mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+	mlx_put_image_to_window(mlx->init,
+		mlx->win, mlx->pdead, mlx->x * 50, mlx->y * 50);
+	ft_putstr_fd("GAME OVER!\n", 1);
+	mlx->end++;
 }
 
 int	ft_hold_end(t_mlx *mlx)
