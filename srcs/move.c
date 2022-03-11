@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:39:45 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/11 16:39:50 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/11 18:59:46 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	ft_move(int keycode, t_mlx *mlx)
 		mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, 0, 0);
 		mlx_string_put(mlx->init, mlx->win, 21, 29, 0x0000FF00,
 			ft_itoa(mlx->move));
-		ft_check_map(mlx);
 	}
 	else if (keycode == ESC)
 		ft_end(mlx);

@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:31 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/11 17:08:33 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/11 22:04:30 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	ft_exit_pos(t_mlx *mlx);
 int		ft_enemy_left(t_mlx *mlx, int *x, int *y);
 int		ft_enemy_right(t_mlx *mlx, int *x, int *y);
 int		ft_enemy(t_mlx *mlx);
+void	ft_enemy_cond(t_mlx *mlx, int *x, int *y, int *sw);
 void	ft_check_map(t_mlx *mlx);
 
 #endif
