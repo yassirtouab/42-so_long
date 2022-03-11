@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:39:45 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 19:13:09 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/11 16:39:50 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_move(int keycode, t_mlx *mlx)
 	{
 		mlx_put_image_to_window(mlx->init,
 			mlx->win, mlx->bg, mlx->x * 50, mlx->y * 50);
+		mlx->map[mlx->y][mlx->x] = '0';
 		if (keycode == UP)
 			mlx_put_image_to_window(mlx->init, mlx->win,
 				mlx->player2, mlx->x * 50, --(mlx->y) * 50);
@@ -30,9 +31,11 @@ int	ft_move(int keycode, t_mlx *mlx)
 		else if (keycode == LEFT)
 			mlx_put_image_to_window(mlx->init, mlx->win,
 				mlx->player2, --(mlx->x) * 50, mlx->y * 50);
+		mlx->map[mlx->y][mlx->x] = 'P';
 		mlx_put_image_to_window(mlx->init, mlx->win, mlx->wall, 0, 0);
 		mlx_string_put(mlx->init, mlx->win, 21, 29, 0x0000FF00,
 			ft_itoa(mlx->move));
+		ft_check_map(mlx);
 	}
 	else if (keycode == ESC)
 		ft_end(mlx);

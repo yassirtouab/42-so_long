@@ -6,11 +6,20 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 16:51:07 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/11 16:39:29 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_check_map(t_mlx *mlx)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < mlx->mheight)
+		printf("%s\n", mlx->map[i++]);
+}
 
 int	main(int ac, char **av)
 {

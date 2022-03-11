@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:46:37 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 20:05:46 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/11 17:12:13 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_put_player(t_mlx *mlx)
 {
 	static size_t	i;
 
-
 	if (!mlx->end)
 	{
 		if (i < 20)
@@ -51,8 +50,7 @@ int	ft_put_player(t_mlx *mlx)
 		i++;
 		if (i == 40)
 			i = 0;
-		// ft_enemy_left(mlx);
-		ft_enemy_right(mlx);
+		ft_enemy(mlx);
 	}
 	else
 		ft_hold_end(mlx);
