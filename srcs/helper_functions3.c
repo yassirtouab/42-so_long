@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:50:49 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/08 16:58:34 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/12 00:50:25 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_hold_end(t_mlx *mlx)
 {
 	if (mlx->end)
 	{
-		if (mlx->map[mlx->y][mlx->x] == 'E' && mlx->end == 5000)
+		if (mlx->y == mlx->eposy && mlx->x == mlx->eposx && mlx->end == 5000)
 			mlx_put_image_to_window(mlx->init,
 				mlx->win, mlx->exit, mlx->x * 50, mlx->y * 50);
 		if (mlx->end == 15000)
