@@ -6,7 +6,7 @@
 /*   By: ytouab <ytouab@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 16:07:33 by ytouab            #+#    #+#             */
-/*   Updated: 2022/03/11 16:39:29 by ytouab           ###   ########.fr       */
+/*   Updated: 2022/03/16 12:07:19 by ytouab           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int	main(int ac, char **av)
 		mlx_key_hook(mlx->win, ft_move, mlx);
 		mlx_loop(mlx);
 	}
+	else
+		ft_putstr_fd("Error\n", 2);
 	return (0);
 }
